@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>For My Love ❤️</title>
 
 <style>
 body{
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background:#f4efe9;
   text-align:center;
   padding:20px;
@@ -29,6 +29,7 @@ button{
   color:white;
   border:none;
   border-radius:8px;
+  font-size:16px;
 }
 img{
   width:100%;
@@ -41,6 +42,7 @@ img{
 
 <body>
 
+<!-- LOGIN -->
 <div class="box" id="login">
   <h2>💌 Secret Love Page</h2>
   <p>Password type pannunga</p>
@@ -48,6 +50,7 @@ img{
   <button onclick="openLove()">Open</button>
 </div>
 
+<!-- CONTENT -->
 <div class="box" id="content">
 
   <!-- MUSIC -->
@@ -55,11 +58,20 @@ img{
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
-  <h2>Hi En Uyire ❤️</h2>
+  <h2>Ammu 😚🤍</h2>
+
   <p>
-    Unna pakka mudiyatha intha distance-um,<br>
-    Enna unna love panna thadukka mudiyala 😘<br><br>
-    Nee eppavum en heart-la thaan 💖
+    Valentine’s💌 Day ipo naa un kooda illa nu feel pannatha kullima 🫂 <br>
+    Ellarum meet pannuvanga, photos edupanga 📸 <br>
+    ana namakku intha Lovers day phone la mattum thaan 😮‍💨 <br><br>
+
+    First Valentine’s Day meet panna mudiyala nu romba kastama irukku ammu 😔 <br>
+    ana next year kandippa meet pannuvom nu belief pannuvom thanga pulla 😌 <br><br>
+
+    Intha long distance namma body ah mattum than pirichirukku <br>
+    ana namma heart eppothum onna than irukkum💖 <br><br>
+
+    Love you dhu kutty 🤍💋
   </p>
 
   <!-- PHOTOS -->
@@ -68,19 +80,26 @@ img{
   <img src="photo3.jpg">
 
   <p>
-    Happy Lovers Day 💞<br>
-    — Un Arul mama
+    Happy Valentine’s Day Ammu 💘<br>
+    — By Arul Venthan 🖤
   </p>
-
 </div>
 
 <script>
 function openLove(){
-  if(document.getElementById("pass").value==="Arul mama"){
+  const password = document.getElementById("pass").value;
+
+  if(password === "Arul mama na unna kattikiran"){
     document.getElementById("login").style.display="none";
     document.getElementById("content").style.display="block";
+
+    // POPUP AFTER OPEN
+    setTimeout(function(){
+      alert("I miss you ammu 🤍🫂");
+    }, 800);
+
   }else{
-    alert("Wrong password 😜");
+    alert("Kullima 😜 Wrong password");
   }
 }
 </script>
