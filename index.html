@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+body{
+  font-family: Arial;
+  background:#f4efe9;
+  text-align:center;
+  padding:20px;
+}
+.box{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  max-width:420px;
+  margin:auto;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+input,button{
+  padding:10px;
+  width:80%;
+  margin-top:10px;
+}
+button{
+  background:teal;
+  color:white;
+  border:none;
+  border-radius:8px;
+}
+img{
+  width:100%;
+  border-radius:12px;
+  margin-top:10px;
+}
+#content{display:none;}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="login">
+  <h2>💌 Secret Love Page</h2>
+  <p>Password type pannunga</p>
+  <input id="pass" placeholder="Type here">
+  <button onclick="openLove()">Open</button>
+</div>
+
+<div class="box" id="content">
+
+  <!-- MUSIC -->
+  <audio autoplay loop controls>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <h2>Hi En Uyire ❤️</h2>
+  <p>
+    Unna pakka mudiyatha intha distance-um,<br>
+    Enna unna love panna thadukka mudiyala 😘<br><br>
+    Nee eppavum en heart-la thaan 💖
+  </p>
+
+  <!-- PHOTOS -->
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+  <img src="photo3.jpg">
+
+  <p>
+    Happy Lovers Day 💞<br>
+    — Un Arul mama
+  </p>
+
+</div>
+
+<script>
+function openLove(){
+  if(document.getElementById("pass").value==="Arul mama"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("content").style.display="block";
+  }else{
+    alert("Wrong password 😜");
+  }
+}
+</script>
+
+</body>
+</html>
