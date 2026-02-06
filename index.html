@@ -10,25 +10,8 @@ body{
   background:#f4efe9;
   text-align:center;
   padding:20px;
-  overflow-x:hidden;
+  overflow:hidden;
 }
-
-/* ❤️ HEART FALLING ANIMATION */
-.heart{
-  position:fixed;
-  top:-10px;
-  color:#ff5c8a;
-  font-size:20px;
-  animation:fall linear forwards;
-  z-index:0;
-}
-@keyframes fall{
-  to{
-    transform:translateY(110vh);
-    opacity:0;
-  }
-}
-
 .box{
   background:white;
   padding:20px;
@@ -36,8 +19,6 @@ body{
   max-width:420px;
   margin:auto;
   box-shadow:0 10px 25px rgba(0,0,0,0.1);
-  position:relative;
-  z-index:1;
 }
 input,button{
   padding:10px;
@@ -59,7 +40,7 @@ img{
 /* hide content first */
 #content{display:none;}
 
-/* video fade effect */
+/* video fade */
 #videoBox{
   opacity:0;
   transition:opacity 2s ease;
@@ -69,21 +50,29 @@ img{
   opacity:1;
 }
 
-/* text before video */
-#videoText{
-  display:none;
-  margin-top:15px;
-  font-size:18px;
-  font-weight:bold;
-  color:#444;
+/* falling hearts */
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
+  color:#ff4d6d;
 }
-#videoText.show{
-  display:block;
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 </style>
 </head>
 
 <body>
+
+<!-- wrong password sound -->
+<audio id="wrongSound">
+  <source src="wrong.mp3" type="audio/mpeg">
+</audio>
 
 <!-- LOGIN -->
 <div class="box" id="login">
@@ -101,22 +90,13 @@ img{
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- WRONG PASSWORD SOUND -->
-  <audio id="wrongSound">
-    <source src="wrong.mp3" type="audio/mpeg">
-  </audio>
-
   <h2>Ammu😚🤍</h2>
 
   <p>
     Valentine’s Day ipo naa un kooda illa nu feel pannatha kullima 🫂<br>
-    Ellarum meet pannuvanga 📸 edupanga ana namakku intha Lovers day phone la mattum thaan mayilu 😮‍💨
-    First Valentine’s Day meet panna mudiyala nu rompa kastama irukku ammu 😫
-    ana next year kandippa meet pannuvom nu belief pannuvom thanga pulla💌🫂<br><br>
-
+    Ellarum meet pannuvanga 📸 edupanga ana namakku intha Lovers day phone la mattum thaan mayilu 😮‍💨First Valentine’s Day meet panna mudiyala nu rompa kastama irukku ammu 😫 ana next year  kandippa meet pannuvom nu belief pannuvom thanga pulla💌🫂<br><br>
     Intha Long distance namma body ah mattum than pirichirukku<br>
     ana namma heart yepothum onna thaan irukkum pondati 🫂😚🤍<br><br>
-
     Love you dhu kutty 🤍💋
   </p>
 
@@ -125,12 +105,9 @@ img{
   <img src="photo2.jpg">
   <img src="photo3.jpg">
 
-  <!-- TEXT BEFORE VIDEO -->
-  <div id="videoText">This is for you ammu 🤍</div>
-
   <!-- VIDEO -->
   <div id="videoBox">
-    <video id="loveVideo" width="100%" controls loop muted style="border-radius:12px;">
+    <video id="loveVideo" width="100%" controls loop style="border-radius:12px;">
       <source src="video.mp4" type="video/mp4">
     </video>
   </div>
@@ -143,40 +120,35 @@ img{
 </div>
 
 <script>
-/* LOGIN */
 function openLove(){
-  if(document.getElementById("pass").value === "Arul mama na unna kattikiran"){
-    document.getElementById("login").style.display = "none";
-    document.getElementById("content").style.display = "block";
-    document.getElementById("bgMusic").play();
+  if(document.getElementById("pass").value==="Arul mama na unna kattikiran"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("content").style.display="block";
+    startHearts();
   }else{
     document.getElementById("wrongSound").play();
-    alert("Kullima 😜wrong posword🤭");
+    alert("Kullima 😜 wrong password 🤭\nI miss you ammu 💔");
   }
 }
 
-/* SONG END → TEXT → VIDEO */
-document.getElementById("bgMusic").addEventListener("ended", function(){
-  document.getElementById("videoText").classList.add("show");
+/* hearts animation */
+function startHearts(){
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerText="💗";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  },300);
+}
 
-  setTimeout(function(){
-    document.getElementById("videoBox").classList.add("show");
-    document.getElementById("loveVideo").play();
-  }, 2000);
+/* song end → video */
+document.getElementById("bgMusic").addEventListener("ended",function(){
+  document.getElementById("videoBox").classList.add("show");
+  document.getElementById("loveVideo").play();
 });
-
-/* ❤️ HEART GENERATOR */
-setInterval(function(){
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.animationDuration = (3 + Math.random()*3) + "s";
-  heart.style.fontSize = (15 + Math.random()*20) + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(()=>heart.remove(),6000);
-},300);
 </script>
 
 </body>
