@@ -1,16 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>For My Love ❤️</title>
 
 <style>
 body{
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background:#f4efe9;
   text-align:center;
   padding:20px;
+  overflow-x:hidden;
 }
+
+/* ❤️ HEART FALLING ANIMATION */
+.heart{
+  position:fixed;
+  top:-10px;
+  color:#ff5c8a;
+  font-size:20px;
+  animation:fall linear forwards;
+  z-index:0;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+
 .box{
   background:white;
   padding:20px;
@@ -18,6 +36,8 @@ body{
   max-width:420px;
   margin:auto;
   box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  position:relative;
+  z-index:1;
 }
 input,button{
   padding:10px;
@@ -29,14 +49,37 @@ button{
   color:white;
   border:none;
   border-radius:8px;
-  font-size:16px;
 }
 img{
   width:100%;
   border-radius:12px;
   margin-top:10px;
 }
+
+/* hide content first */
 #content{display:none;}
+
+/* video fade effect */
+#videoBox{
+  opacity:0;
+  transition:opacity 2s ease;
+  margin-top:15px;
+}
+#videoBox.show{
+  opacity:1;
+}
+
+/* text before video */
+#videoText{
+  display:none;
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+  color:#444;
+}
+#videoText.show{
+  display:block;
+}
 </style>
 </head>
 
@@ -54,22 +97,25 @@ img{
 <div class="box" id="content">
 
   <!-- MUSIC -->
-  <audio autoplay loop controls>
+  <audio id="bgMusic" controls autoplay>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
-  <h2>Ammu 😚🤍</h2>
+  <!-- WRONG PASSWORD SOUND -->
+  <audio id="wrongSound">
+    <source src="wrong.mp3" type="audio/mpeg">
+  </audio>
+
+  <h2>Ammu😚🤍</h2>
 
   <p>
-    Valentine’s💌 Day ipo naa un kooda illa nu feel pannatha kullima 🫂 <br>
-    Ellarum meet pannuvanga, photos edupanga 📸 <br>
-    ana namakku intha Lovers day phone la mattum thaan 😮‍💨 <br><br>
+    Valentine’s Day ipo naa un kooda illa nu feel pannatha kullima 🫂<br>
+    Ellarum meet pannuvanga 📸 edupanga ana namakku intha Lovers day phone la mattum thaan mayilu 😮‍💨
+    First Valentine’s Day meet panna mudiyala nu rompa kastama irukku ammu 😫
+    ana next year kandippa meet pannuvom nu belief pannuvom thanga pulla💌🫂<br><br>
 
-    First Valentine’s Day meet panna mudiyala nu romba kastama irukku ammu 😔 <br>
-    ana next year kandippa meet pannuvom nu belief pannuvom thanga pulla 😌 <br><br>
-
-    Intha long distance namma body ah mattum than pirichirukku <br>
-    ana namma heart eppothum onna than irukkum💖 <br><br>
+    Intha Long distance namma body ah mattum than pirichirukku<br>
+    ana namma heart yepothum onna thaan irukkum pondati 🫂😚🤍<br><br>
 
     Love you dhu kutty 🤍💋
   </p>
@@ -79,29 +125,58 @@ img{
   <img src="photo2.jpg">
   <img src="photo3.jpg">
 
+  <!-- TEXT BEFORE VIDEO -->
+  <div id="videoText">This is for you ammu 🤍</div>
+
+  <!-- VIDEO -->
+  <div id="videoBox">
+    <video id="loveVideo" width="100%" controls loop muted style="border-radius:12px;">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
+
   <p>
-    Happy Valentine’s Day Ammu 💘<br>
+    Happy Valentine’s Day ammu 💘<br>
     — By Arul Venthan 🖤
   </p>
+
 </div>
 
 <script>
+/* LOGIN */
 function openLove(){
-  const password = document.getElementById("pass").value;
-
-  if(password === "Arul mama na unna kattikiran"){
-    document.getElementById("login").style.display="none";
-    document.getElementById("content").style.display="block";
-
-    // POPUP AFTER OPEN
-    setTimeout(function(){
-      alert("I miss you ammu 🤍🫂");
-    }, 800);
-
+  if(document.getElementById("pass").value === "Arul mama na unna kattikiran"){
+    document.getElementById("login").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    document.getElementById("bgMusic").play();
   }else{
-    alert("Kullima 😜 Wrong password");
+    document.getElementById("wrongSound").play();
+    alert("Kullima 😜wrong posword🤭");
   }
 }
+
+/* SONG END → TEXT → VIDEO */
+document.getElementById("bgMusic").addEventListener("ended", function(){
+  document.getElementById("videoText").classList.add("show");
+
+  setTimeout(function(){
+    document.getElementById("videoBox").classList.add("show");
+    document.getElementById("loveVideo").play();
+  }, 2000);
+});
+
+/* ❤️ HEART GENERATOR */
+setInterval(function(){
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.animationDuration = (3 + Math.random()*3) + "s";
+  heart.style.fontSize = (15 + Math.random()*20) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),6000);
+},300);
 </script>
 
 </body>
