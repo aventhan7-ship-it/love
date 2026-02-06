@@ -10,7 +10,6 @@ body{
   background:#f4efe9;
   text-align:center;
   padding:20px;
-  overflow:hidden;
 }
 .box{
   background:white;
@@ -36,8 +35,6 @@ img{
   border-radius:12px;
   margin-top:10px;
 }
-
-/* hide content first */
 #content{display:none;}
 
 /* video fade */
@@ -49,30 +46,10 @@ img{
 #videoBox.show{
   opacity:1;
 }
-
-/* falling hearts */
-.heart{
-  position:fixed;
-  top:-10px;
-  font-size:20px;
-  animation:fall linear forwards;
-  color:#ff4d6d;
-}
-@keyframes fall{
-  to{
-    transform:translateY(110vh);
-    opacity:0;
-  }
-}
 </style>
 </head>
 
 <body>
-
-<!-- wrong password sound -->
-<audio id="wrongSound">
-  <source src="wrong.mp3" type="audio/mpeg">
-</audio>
 
 <!-- LOGIN -->
 <div class="box" id="login">
@@ -86,17 +63,26 @@ img{
 <div class="box" id="content">
 
   <!-- MUSIC -->
-  <audio id="bgMusic" controls autoplay>
+  <audio id="bgMusic" controls>
     <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- WRONG PASSWORD SOUND -->
+  <audio id="wrongSound">
+    <source src="wrong.mp3" type="audio/mpeg">
   </audio>
 
   <h2>Ammu😚🤍</h2>
 
   <p>
     Valentine’s Day ipo naa un kooda illa nu feel pannatha kullima 🫂<br>
-    Ellarum meet pannuvanga 📸 edupanga ana namakku intha Lovers day phone la mattum thaan mayilu 😮‍💨First Valentine’s Day meet panna mudiyala nu rompa kastama irukku ammu 😫 ana next year  kandippa meet pannuvom nu belief pannuvom thanga pulla💌🫂<br><br>
+    Ellarum meet pannuvanga 📸 edupanga ana namakku intha Lovers day phone la mattum thaan mayilu 😮‍💨<br>
+    First Valentine’s Day meet panna mudiyala nu romba kastama irukku ammu 😫<br>
+    ana next year kandippa meet pannuvom nu belief pannuvom thanga pulla 💌🫂<br><br>
+
     Intha Long distance namma body ah mattum than pirichirukku<br>
     ana namma heart yepothum onna thaan irukkum pondati 🫂😚🤍<br><br>
+
     Love you dhu kutty 🤍💋
   </p>
 
@@ -105,7 +91,7 @@ img{
   <img src="photo2.jpg">
   <img src="photo3.jpg">
 
-  <!-- VIDEO -->
+  <!-- VIDEO (after song ends) -->
   <div id="videoBox">
     <video id="loveVideo" width="100%" controls loop style="border-radius:12px;">
       <source src="video.mp4" type="video/mp4">
@@ -121,33 +107,22 @@ img{
 
 <script>
 function openLove(){
-  if(document.getElementById("pass").value==="Arul mama na unna kattikiran"){
+  if(document.getElementById("pass").value === "Arul mama na unna kattikiran"){
     document.getElementById("login").style.display="none";
     document.getElementById("content").style.display="block";
-    startHearts();
+    document.getElementById("bgMusic").play();
   }else{
     document.getElementById("wrongSound").play();
-    alert("Kullima 😜 wrong password 🤭\nI miss you ammu 💔");
+    alert("Kullima 😜 wrong password 🤭");
   }
 }
 
-/* hearts animation */
-function startHearts(){
-  setInterval(()=>{
-    const heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerText="💗";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(2+Math.random()*3)+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),5000);
-  },300);
-}
-
-/* song end → video */
-document.getElementById("bgMusic").addEventListener("ended",function(){
-  document.getElementById("videoBox").classList.add("show");
-  document.getElementById("loveVideo").play();
+/* when song ends → show video */
+document.getElementById("bgMusic").addEventListener("ended", function(){
+  var videoBox = document.getElementById("videoBox");
+  var video = document.getElementById("loveVideo");
+  videoBox.classList.add("show");
+  video.play();
 });
 </script>
 
